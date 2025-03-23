@@ -7,9 +7,6 @@ use App\Models\Listing;
 
 class ListingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return inertia(
@@ -20,9 +17,6 @@ class ListingController extends Controller
         );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return inertia(
@@ -31,17 +25,25 @@ class ListingController extends Controller
         );
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        Listing::create($request->all());
+        Listing::create(
+            $request->validate(
+            [
+                'bedrooms' => ['required', 'integer', 'min:1', 'max:20'],
+                'bathrooms' => ['required', 'integer', 'min:1', 'max:20'],
+                'area' => ['required', 'integer', 'min:1', 'max:10000'],
+                'city' => ['required', 'string', 'max:255'],
+                'postal_code' => ['required', 'string', 'max:255'],
+                'street' => ['required', 'string', 'max:255'],
+                'house_number' => ['required', 'string', 'max:255'],
+                'price' => ['required', 'integer', 'min:1', 'max:10000000']
+            ]));
+        
+        return redirect()->route('listing.index')
+            ->with('success', 'Listing created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Listing $listing)
     {
         return inertia(
@@ -52,27 +54,40 @@ class ListingController extends Controller
         );
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Listing $listing)
     {
-        //
+        return inertia(
+            'Listing/Edit',
+            [
+                'listing' => $listing
+            ]
+        );
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Listing $listing)
     {
-        //
+        $listing->update(
+            $request->validate(
+            [
+                'bedrooms' => ['required', 'integer', 'min:1', 'max:20'],
+                'bathrooms' => ['required', 'integer', 'min:1', 'max:20'],
+                'area' => ['required', 'integer', 'min:1', 'max:10000'],
+                'city' => ['required', 'string', 'max:255'],
+                'postal_code' => ['required', 'string', 'max:255'],
+                'street' => ['required', 'string', 'max:255'],
+                'house_number' => ['required', 'string', 'max:255'],
+                'price' => ['required', 'integer', 'min:1', 'max:10000000']
+            ]));
+        
+        return redirect()->route('listing.index')
+            ->with('success', 'Listing updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Listing $listing)
     {
-        //
+        $listing->delete();
+        
+        return redirect()->back()
+            ->with('success', 'Listing deleted successfully.');
     }
 }
