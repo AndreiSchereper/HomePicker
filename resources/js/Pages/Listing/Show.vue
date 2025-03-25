@@ -1,5 +1,5 @@
 <template>
-    <ListingAddress :listing="listing" />
+    <div><ListingAddress :listing="listing" /></div>
 </template>
 
 <script setup>

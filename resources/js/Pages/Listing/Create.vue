@@ -85,16 +85,7 @@
         price: 0,
     });
     const create = () => {
-        form.post('/listing');
+        form.post(route('listing.store'));
     }
   </script>
   
-  <style scoped>
-  label {
-    margin-right: 2em;
-  }
-  
-  div {
-    padding: 2px
-  }
-  </style>

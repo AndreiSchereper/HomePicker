@@ -3,15 +3,15 @@
         <h1>Listings</h1>
         <div v-for="listing in listings" :key="listing.id">
             <div>
-                <Link :href="`/listing/${listing.id}`">
+                <Link :href="route('listing.show', listing.id)">
                     <ListingAddress :listing="listing" />
                 </Link>
             </div>
             <div>
-                <Link :href="`/listing/${listing.id}/edit`">Edit</Link>
+                <Link :href="route('listing.edit', listing.id)">Edit</Link>
             </div>
             <div>
-                <Link :href="`/listing/${listing.id}`" method="delete" as="button">Delete</Link>
+                <Link :href="route('listing.destroy', listing.id)" method="delete" as="button">Delete</Link>
             </div>
         </div>
     </div>

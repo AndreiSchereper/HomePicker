@@ -8,16 +8,21 @@
     },
     "devDependencies": {
         "@inertiajs/vue3": "^2.0.3",
+        "@tailwindcss/forms": "^0.5.10",
         "@vitejs/plugin-vue": "^5.2.1",
-        "autoprefixer": "^10.4.20",
+        "autoprefixer": "^10.4.21",
         "axios": "^1.7.4",
         "concurrently": "^9.0.1",
         "eslint": "^9.21.0",
         "eslint-plugin-vue": "^9.32.0",
         "laravel-vite-plugin": "^1.2.0",
-        "postcss": "^8.4.47",
-        "tailwindcss": "^3.4.13",
-        "vite": "^6.0.11",
+        "postcss": "^8.5.3",
+        "postcss-nesting": "^13.0.1",
+        "tailwindcss": "^3.3.5",
+        "vite": "^6.2.3",
         "vue": "^3.5.13"
+    },
+    "dependencies": {
+        "@tailwindcss/vite": "^4.0.15"
     }
 }
