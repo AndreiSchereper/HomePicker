@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Listing;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Routing\Controller;
 
 class ListingController extends Controller
 {
+    use AuthorizesRequests;
+    public function __construct()
+    {
+        $this->authorizeResource(Listing::class, 'listing');
+    }
     public function index()
     {
         return inertia(
@@ -27,7 +34,7 @@ class ListingController extends Controller
 
     public function store(Request $request)
     {
-        Listing::create(
+        $request->user()->listings()->create(
             $request->validate(
             [
                 'bedrooms' => ['required', 'integer', 'min:1', 'max:20'],
