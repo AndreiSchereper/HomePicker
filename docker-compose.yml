@@ -53,3 +53,13 @@ services:
     ports:
       - 1025:1025
       - 8025:8025
+  migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - app
+      - mysql
+    volumes:
+      - .:/var/www/html
+    command: sh -c "echo '⏳ Waiting for Laravel...'; sleep 5; php artisan migrate:refresh --seed --force; echo '✅ Migrations done'"
