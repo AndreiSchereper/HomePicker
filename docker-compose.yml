@@ -62,4 +62,4 @@ services:
       - mysql
     volumes:
       - .:/var/www/html
-    command: sh -c "echo '⏳ Waiting for Laravel...'; sleep 5; php artisan migrate:refresh --seed --force; echo '✅ Migrations done'"
+    command: sh -c "echo '⏳ Waiting for Laravel...'; sleep 10; php artisan migrate:refresh --seed --force; echo '✅ Migrations done'"

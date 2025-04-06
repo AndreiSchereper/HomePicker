@@ -16,6 +16,15 @@ export default defineConfig({
     resolve: {
         alias: {
             ziggy: path.resolve('vendor/tightenco/ziggy/dist'),
-        }
-    }
+        },
+    },
+    server: {
+        host: true,
+        port: 5173,
+        strictPort: true,
+        hmr: {
+            host: 'localhost',
+            protocol: 'ws',
+        },
+    },
 });
