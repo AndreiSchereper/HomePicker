@@ -31,6 +31,7 @@ class RealtorListingController extends Controller
                      ->listings()
                      ->filter($filters)
                      ->withCount('images')
+                     ->withCount('offers')
                      ->paginate(5)
                      ->withQueryString()
              ]
@@ -103,5 +104,13 @@ class RealtorListingController extends Controller
          $listing->restore();
  
          return redirect()->back()->with('success', 'Listing was restored!');
+     }
+
+     public function show(Listing $listing)
+     {
+         return inertia(
+             'Realtor/Show',
+             ['listing' => $listing->load('offers', 'offers.bidder')]
+         );
      }
 }
